@@ -26,14 +26,6 @@ def cadastrarEntrega(dicEnderecoColeta,dicEnderecoEntrega,descricao,id_cliente):
 # Cria o objeto principal do Flask e do OAuth
 app = Flask(__name__)
 oauth = OAuth(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    User = lerCliente(user_id)
-    return User.get(user_id)
 
 
 @app.route("/")
