@@ -109,8 +109,8 @@ def home():
 def facebook():
     try:
     #configurações do facebook
-        FACEBOOK_CLIENT_ID = '376389744363188' #os.environ.get('FACEBOOK_CLIENT_ID')
-        FACEBOOK_CLIENT_SECRET = '49f23be22deee6544e4e0cc868e8c831' #os.environ.get('FACEBOOK_CLIENT_SECRET')
+        FACEBOOK_CLIENT_ID = os.environ.get('FACEBOOK_CLIENT_ID')
+        FACEBOOK_CLIENT_SECRET = os.environ.get('FACEBOOK_CLIENT_SECRET')
         oauth.register(
             name='facebook',
             client_id=FACEBOOK_CLIENT_ID,

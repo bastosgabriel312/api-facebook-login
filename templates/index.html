@@ -24,13 +24,15 @@
                 <button type="submit" class="btn button-login form-control btn-danger mb-3">Login</button>
               </div>
               <!-- Botão login facebook -->
-              <div class="mb-1">
-                <a href="/facebook/">
-                  <img id="facebook"
-                    src="https://img.shields.io/badge/Facebook-Connect-red?style=for-the-badge&labelColor=black&logo=facebook"
-                    alt="Facebook">
-                  </a>
-              </div>
+              {% if session['TIPO_USUARIO']=='cliente'%}
+                <div class="mb-1">
+                  <a href="/facebook/">
+                    <img id="facebook"
+                      src="https://img.shields.io/badge/Facebook-Connect-red?style=for-the-badge&labelColor=black&logo=facebook"
+                      alt="Facebook">
+                    </a>
+                </div>
+              {% endif %}
               <div class="mb-1">
                 <a type="submit" class="link-cadastro" href="/cadastro/{{session['TIPO_USUARIO']}}">Não possui conta? Cadastre-se</a>
               </div>
