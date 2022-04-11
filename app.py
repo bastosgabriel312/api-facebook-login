@@ -1,6 +1,5 @@
 from crypt import methods
-from flask import Flask, request, render_template, redirect, session, url_for, flash
-from flask_login import LoginManager
+from flask import Flask, request, render_template, redirect, session, url_for
 from db_levvo import *
 from db_levvo import lerClienteEmail
 from user import Cliente, Entregador
@@ -108,38 +107,43 @@ def home():
 
 @app.route('/facebook/')
 def facebook():
-   #configurações do facebook
-    FACEBOOK_CLIENT_ID = '376389744363188' #os.environ.get('FACEBOOK_CLIENT_ID')
-    FACEBOOK_CLIENT_SECRET = '49f23be22deee6544e4e0cc868e8c831' #os.environ.get('FACEBOOK_CLIENT_SECRET')
-    oauth.register(
-        name='facebook',
-        client_id=FACEBOOK_CLIENT_ID,
-        client_secret=FACEBOOK_CLIENT_SECRET,
-        access_token_url='https://graph.facebook.com/oauth/access_token',
-        access_token_params=None,
-        authorize_url='https://www.facebook.com/dialog/oauth',
-        authorize_params=None,
-        api_base_url='https://graph.facebook.com/',
-        client_kwargs={'scope': 'email'},
-    )
-    redirect_uri = url_for('facebook_auth', _external=True)
-    return oauth.facebook.authorize_redirect(redirect_uri)
+    try:
+    #configurações do facebook
+        FACEBOOK_CLIENT_ID = '376389744363188' #os.environ.get('FACEBOOK_CLIENT_ID')
+        FACEBOOK_CLIENT_SECRET = '49f23be22deee6544e4e0cc868e8c831' #os.environ.get('FACEBOOK_CLIENT_SECRET')
+        oauth.register(
+            name='facebook',
+            client_id=FACEBOOK_CLIENT_ID,
+            client_secret=FACEBOOK_CLIENT_SECRET,
+            access_token_url='https://graph.facebook.com/oauth/access_token',
+            access_token_params=None,
+            authorize_url='https://www.facebook.com/dialog/oauth',
+            authorize_params=None,
+            api_base_url='https://graph.facebook.com/',
+            client_kwargs={'scope': 'email'},
+        )
+        redirect_uri = url_for('facebook_auth', _external=True)
+        return oauth.facebook.authorize_redirect(redirect_uri)
+    except:
+        return redirect(url_for('index'))
  
 @app.route('/facebook/auth/', methods=['GET','POST'])
 def facebook_auth():
-    token = oauth.facebook.authorize_access_token()
-    resp = oauth.facebook.get(
-        'https://graph.facebook.com/me?fields=id,name,email,picture{url}')
-    profile = resp.json()
-    if session['TIPO_USUARIO']=='cliente': user = Cliente(profile['email'])
-    elif session['TIPO_USUARIO']=='entregador': user = Entregador(profile['email'])
+    try:
+        token = oauth.facebook.authorize_access_token()
+        resp = oauth.facebook.get(
+            'https://graph.facebook.com/me?fields=id,name,email,picture{url}')
+        profile = resp.json()
+        if session['TIPO_USUARIO']=='cliente': user = Cliente(profile['email'])
+        elif session['TIPO_USUARIO']=='entregador': user = Entregador(profile['email'])
 
-    if user.autenticaFacebook(profile):
-        session['EMAIL'],session['NOME'],session['ID'] = user.email,user.nome,user.id
-        return redirect('/home')
-    else:
-        return redirect(url_for(f"login{type(user).__name__}",mensagem=LOGIN_INVALIDO))
-
+        if user.autenticaFacebook(profile):
+            session['EMAIL'],session['NOME'],session['ID'] = user.email,user.nome,user.id
+            return redirect('/home')
+        else:
+            return redirect(url_for(f"login{type(user).__name__}",mensagem=LOGIN_INVALIDO))
+    except:
+        return redirect(url_for('index'))
 
 
 
