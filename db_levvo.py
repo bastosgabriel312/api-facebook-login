@@ -69,8 +69,11 @@ def lerCliente(id):
       return cliente
 
 def lerClienteEmail(email):
-   cliente = db_session.query(Cliente).filter_by(email=email).one()
-   return cliente
+   try:
+      cliente = db_session.query(Cliente).filter_by(email=email).one()
+      return cliente
+   except:
+      return None
 
 
 def editarNomeCliente(id,novoNome):
@@ -111,8 +114,11 @@ def lerEntregador(id):
       return entregador
 
 def lerEntregadorEmail(email):
-   entregador = db_session.query(Entregador).filter_by(email=email).one()
-   return entregador
+   try:
+      entregador = db_session.query(Entregador).filter_by(email=email).one()
+      return entregador
+   except:
+      return None
 
 
 def editarNomeEntregador(id,novoNome):
