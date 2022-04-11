@@ -69,8 +69,8 @@ def lerCliente(id):
       return cliente
 
 def lerClienteEmail(email):
-   for cliente in db_session.query(Cliente).filter_by(email=email):
-      return cliente
+   cliente = db_session.query(Cliente).filter_by(email=email).one()
+   return cliente
 
 
 def editarNomeCliente(id,novoNome):
@@ -107,12 +107,12 @@ def criarEntregador(nome,email,senha,telefone, placa):
    return entregador
 
 def lerEntregador(id):
-   for entregador in db_session.query(Entregador).filter_by(id=id):
+   for entregador in db_session.query(Entregador).filter_by(id=id).one():
       return entregador
 
 def lerEntregadorEmail(email):
-   for entregador in db_session.query(Entregador).filter_by(email=email):
-      return entregador
+   entregador = db_session.query(Entregador).filter_by(email=email).one()
+   return entregador
 
 
 def editarNomeEntregador(id,novoNome):
