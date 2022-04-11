@@ -148,8 +148,9 @@ def facebook_auth():
 
 
 if __name__ == "__main__":
-    # Configura chave secreta para utilização da session no flask 
-    SECRET_KEY = 'LEVAMOSATEVOCE!@#$@!(%&ssaas'
+    # Configura chave secreta para utilização da session no flask# 
+    SECRET_KEY = 'SUACHAVE'
     app.config['SECRET_KEY'] = SECRET_KEY
     LOGIN_INVALIDO="E-mail ou senha incorretos. Por favor, tente outra vez."
     app.run(debug=True)
+    

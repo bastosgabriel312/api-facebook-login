@@ -5,12 +5,12 @@ from sqlalchemy import Column, Integer, String, insert, delete,select
 import pymysql
 from sqlalchemy.ext.declarative import declarative_base
    
-#base para criação de engine
+#base para criação de engine#
 
 Base = declarative_base()
    
 #Conectanto e criando a máquina para utilizar o sql alchemy
-engine = create_engine('mysql+pymysql://b74s0om2wm3diiii:kaucriymr5qrj7oa@uyu7j8yohcwo35j3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/vxaohtuqm8mtxuxc')
+engine = create_engine('ENGINE')
 Session = sessionmaker(bind=engine)
 db_session = Session()
    
