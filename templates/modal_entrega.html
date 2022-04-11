@@ -1,0 +1,201 @@
+{% block modal_entrega %}
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Entrega</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          <div class="mb-3">
+            <h6> Endereço coleta</h6>
+            <label for="inputEnderecoColeta" class="form-label">Localização</label>
+            <input type="text" class="form-control" name="enderecoColeta" id="inputEnderecoColeta" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputCepColeta" class="form-label">CEP</label>
+            <input type="text" onblur="pesquisacep_coleta(this.value);" name="cepColeta" class="form-control" maxlength="8" id="inputCepColeta" placeholder="" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputBairroColeta" class="form-label">Bairro</label>
+            <input type="text" name="bairroColeta" class="form-control" id="inputBairroColeta" placeholder="" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputCidadeColeta" class="form-label">Cidade</label>
+            <input type="text" name="cidadeColeta" class="form-control" id="inputCidadeColeta" placeholder="" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputUfColeta" class="form-label">UF</label>
+            <input type="text" name="ufColeta" class="form-control" maxlength="2" id="inputUfColeta" placeholder="" required>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <h6> Endereço entrega</h6>
+            <label for="inputEndereco" class="form-label">Localização</label>
+            <input type="text" class="form-control" name="enderecoEntrega" id="inputEndereco" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputCepEntrega" class="form-label">CEP</label>
+            <input type="text" onblur="pesquisacep(this.value);" name="cepEntrega" class="form-control" maxlength="8" id="inputCepEntrega" placeholder="" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputBairroEntrega" class="form-label">Bairro</label>
+            <input type="text" name="bairroEntrega" class="form-control" id="inputBairroEntrega" placeholder="" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputCidadeEntrega" class="form-label">Cidade</label>
+            <input type="text" name="cidadeEntrega" class="form-control" id="inputCidadeEntrega" placeholder="" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputUfEntrega" class="form-label">UF</label>
+            <input type="text" name="ufEntrega" class="form-control" maxlength="2" id="inputUfEntrega" placeholder="" required>
+          </div>
+          <hr>
+          <div class="mb-3">
+            <label for="inputObservacoes" class="form-label">Observacoes</label>
+            <input type="text" name="observacao" class="form-control" maxlength="200" id="inputObservacoes" placeholder="" required>
+          </div>
+        
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+<script>
+function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('inputEndereco').value=("");
+
+}
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('inputEndereco').value=(conteudo.logradouro);
+            document.getElementById('inputBairroEntrega').value=(conteudo.bairro);
+            document.getElementById('inputCidadeEntrega').value=(conteudo.localidade);
+            document.getElementById('inputUfEntrega').value=(conteudo.uf);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('inputEndereco').value="...";
+                document.getElementById('inputBairroEntrega').value="...";
+                document.getElementById('inputCidadeEntrega').value="...";
+                document.getElementById('inputUfEntrega').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };
+
+
+// Endereço de entrega
+
+function limpa_formulário_cep_coleta() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('inputEnderecoColeta').value=("");
+
+}
+    function meu_callback_coleta(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('inputEnderecoColeta').value=(conteudo.logradouro);
+            document.getElementById('inputBairroColeta').value=(conteudo.bairro);
+            document.getElementById('inputCidadeColeta').value=(conteudo.localidade);
+            document.getElementById('inputUfColeta').value=(conteudo.uf);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep_coleta();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep_coleta(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('inputEnderecoColeta').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback_coleta';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep_coleta();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep_coleta();
+        }
+    };
+
+
+</script>
+{% endblock %}

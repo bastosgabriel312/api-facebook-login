@@ -1,0 +1,46 @@
+{% include 'head.html'%}
+
+  <body>
+    <!-- Container exterior -->
+    <div>
+      <div class="item">
+        <h1 style="color: #FF5757; text-shadow: 1px 1px 2px black;">{{mensagem}}.</h1>
+        <br/>
+        <a type="button" class="btn" style="background-color: #FF5757; color: white; font-size: 12px;" href="/login" >Retornar à tela de login</a>
+      </div>
+      {% if session['TIPO_USUARIO'] == 'cliente'%}
+          <div class="item">
+            <a type="button" class="btn button-login form-control btn-danger mb-3 text-userpick button-home" style="max-width: 50rem;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Solicitar uma entrega</a>
+          </div>
+        </div>
+      {% elif session['TIPO_USUARIO'] == 'entregador'%}
+      <div style="margin-left:15%;margin-right:15%">
+          <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">DESCRICAO</th>
+                <th scope="col">ID ENDERECO COLETA</th>
+                <th scope="col">ID ENDERECO FINAL</th>
+                <th scope="col">ID CLIENTE</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for entrega in entregas%}
+              <tr>
+                <th scope="row">{{entrega.id}}</th>
+                <td>{{entrega.descricao}}</td>
+                <td>{{entrega.id_endereco_coleta}}</td>
+                <td>{{entrega.id_endereco_final}}</td>
+                <td>{{entrega.id_cliente}}</td>
+              </tr>
+              <tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+      {% endif %}
+{% include 'modal_entrega.html' %}
+  </body>
+
+{% include 'footer.html'%}

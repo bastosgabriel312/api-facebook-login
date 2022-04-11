@@ -1,0 +1,49 @@
+
+{% include 'head.html'%}
+
+
+  <body>
+    <!-- Container exterior -->
+    <div class="container">
+        <div class="container-form">
+        <!-- formulário -->
+           <form method="POST" class="form-control shadow-lg p-3 mb-5 bg-body rounded">
+            <!-- Primeira Linha -->
+            <div class="mb-3">
+                <label for="emailInput" class="label-email form-label">Email</label>
+                <input type="email" name="email" id="emailInput">
+              </div>
+              <!-- Segunda Linha -->
+              <div class="mb-3">
+                <label for="inputPassword" class="label-password form-label">Senha</label>
+                <input type="password"  name="password" autocomplete="current-password" required="" id="inputPassword">
+                <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+            </div>
+              <!-- Botão Login -->
+              <div class="mb-1">
+                <button type="submit" class="btn button-login form-control btn-danger mb-3">Login</button>
+              </div>
+              <!-- Botão login facebook -->
+              <div class="mb-1">
+                <a href="/facebook/">
+                  <img id="facebook"
+                    src="https://img.shields.io/badge/Facebook-Connect-red?style=for-the-badge&labelColor=black&logo=facebook"
+                    alt="Facebook">
+                  </a>
+              </div>
+              <div class="mb-1">
+                <a type="submit" class="link-cadastro" href="/cadastro/{{session['TIPO_USUARIO']}}">Não possui conta? Cadastre-se</a>
+              </div>
+              
+              <!-- Mensagem passada na tela de login -->
+              {% for args in request.args %}
+              {%if mensagem == ""%}
+              <span class="form-control span-alert">{{request.args[args]}}</span>
+              {%endif%}
+              {% endfor%}
+              <span class="form-control span-alert">{{mensagem}}</span>
+              
+           </form>
+    </div>
+</div>
+{% include 'footer.html'%}

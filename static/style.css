@@ -1,0 +1,116 @@
+body {
+    background-image:  url("/static/background.jpg") !important;
+    background-size: 90%;
+    font-size: 80%;
+    height: 100%;
+    display: grid;
+  }
+  /* Container externo formulário */
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-text {
+    color: #FF5757 !important;
+}
+
+.item{
+    width: 100vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.link-cadastro{
+    color: #2B2E35;
+    padding-top: 7px;
+    font-size: 13px;
+}
+
+/* Container formulário */
+.container-form{
+    width: 300px;
+    height: 500px;
+
+}
+
+.button-home{
+    padding: 20px 20px !important;
+}
+
+.text-userpick{
+    font-size: 30px !important;
+}
+
+/*  formulário */
+form{
+    border-radius: 10px 10px 10px 10px !important;
+    border: solid white !important;
+}
+
+/* Labels do form */
+.label-user{
+    margin-top: 5vmin;
+}
+
+.label-password{
+    margin-top: 2vmin;
+}
+
+
+.form-label{
+    color: #FF5757;
+}
+
+
+/* Inputs do form em geral */
+input{
+    border-top:none !important;
+    border-left:none !important;
+    border-right:none !important;
+    border-bottom:solid 0.1px #FF5757 !important;
+}
+
+input:focus, input:hover{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+
+}
+
+ 
+/* Botão login */
+.button-login{
+    margin-top: 3vmin;
+    margin-bottom: 0vmin !important;
+    background-color: #f1f7fd !important;
+    color: #FF5757;
+}
+
+.button-login:hover{
+    background-color: #FF5757 !important;
+}
+
+/* Icone para visualizar input senha */
+.far{
+    color: #FF5757 !important;
+}
+
+/* Span para alertar falha no login */
+.span-alert{
+    color: rgb(224, 8, 8) !important;
+    border: none !important;
+    margin-top: 0% !important;
+}
+
+/* Input placa */
+
+.input-placa{
+    text-transform:uppercase;
+}

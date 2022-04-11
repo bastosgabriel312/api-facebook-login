@@ -1,0 +1,46 @@
+
+{% include 'head.html'%}
+
+  <body>
+    <!-- Container exterior -->
+    <div class="container">
+        <div class="container-form">
+        <!-- formulário -->
+           <form method="POST" class="form-control shadow-lg p-3 mb-5 bg-body rounded" onSubmit="window.location.href = '/login/entregador';">
+            <!-- Nome Linha -->
+            <div class="mb-3">
+                <label for="nomeInput" class="label-nome form-label">Nome</label>
+                <input type="text" name="nome" maxlength="100" id="nomeInput" required>
+              </div>
+            <!-- E-mail Linha -->
+            <div class="mb-3">
+              <label for="emailInput" class="label-email form-label">E-mail</label>
+              <input type="email" name="email" maxlength="50" id="emailInput" required>
+            </div>
+            <!-- Telefone Linha -->
+            <div class="mb-3">
+              <label for="telefoneInput" class="label-telefone form-label">Telefone</label>
+              <input type="telefone" name="telefone" maxlength="11" id="telefoneInput" required>
+            </div>
+            <!-- Placa Linha -->
+            <div class="mb-3">
+              <label for="placaInput" class="label-placa form-label">Placa</label>
+              <input type="text" name="placa" class="input-placa" maxlength="7" id="placaInput" required>
+            </div>
+
+              <!-- Senha Linha -->
+              <div class="mb-3">
+                <label for="inputPassword" class="label-password form-label">Senha</label>
+                <input type="password"  name="password" maxlength="50"  id="inputPassword" required>
+                <!-- <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i> -->
+              </div>              
+              <!-- Botão Cadastro -->
+              <div class="mb-3">
+                <button type="submit" class="btn button-login form-control btn-danger mb-3">Cadastrar</button>
+              </div>
+              <!-- Mensagem passada na tela de login -->
+              <span class="form-control span-alert">{{mensagem}}</span>
+           </form>
+    </div>
+</div>
+{% include 'footer.html'%}
