@@ -1,5 +1,12 @@
 # api-facebook-login
 
+## Tecnologias utilizadas (Docs)
+  * Python 3 (https://docs.python.org/3.8/)
+  * API Facebook (https://developers.facebook.com/)
+  * Oauth (https://oauth.net)
+  * Flask (https://flask.palletsprojects.com/)
+  
+
 ## Oauth
 ### é implementado para obter autenticação de serviços online. Neste caso foi utilizado para autenticação do Facebook.
 
